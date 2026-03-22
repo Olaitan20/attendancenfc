@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-outfit:     'Outfit', sans-serif;
+  --font-jetbrains:  'JetBrains Mono', monospace;
+
+  /* Design tokens also as CSS vars for inline styles */
+  --color-bg:       #070a10;
+  --color-surface:  #0d1117;
+  --color-surface2: #131820;
+  --color-surface3: #1a2030;
+  --color-border1:  #1e2535;
+  --color-border2:  #2a3348;
+  --color-txt:      #e2e8f5;
+  --color-muted:    #64748b;
+  --color-muted2:   #8896b3;
+  --color-student:  #06b6d4;
+  --color-lecturer: #f59e0b;
+  --color-admin:    #a78bfa;
+  --color-ok:       #10b981;
+  --color-danger:   #f43f5e;
+  --color-warn:     #f97316;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #070a10;
+  color: #e2e8f5;
+  min-height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar       { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #2a3348; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #3a4560; }
+
+/* Remove default button/input outlines */
+button { cursor: pointer; font-family: inherit; }
+input, select, textarea { font-family: inherit; }
+
+/* Utility: hide scrollbar but keep scroll */
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
