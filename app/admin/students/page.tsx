@@ -17,7 +17,7 @@ export default async function AdminStudentsPage() {
   const { toast, showToast } = useToast()
   const students = await getAllUsers()
 
-  const filtered = students.filter(s => {
+  const filtered = students.filter((s: Student) => {
     const matchQ = !search || s.name.toLowerCase().includes(search.toLowerCase()) ||
       s.id.includes(search) || s.cardUid.toLowerCase().includes(search.toLowerCase())
     const matchF = !filter
@@ -32,7 +32,7 @@ export default async function AdminStudentsPage() {
     <DashboardShell title="All Students" toast={toast}>
       <PageHeader
         title="All Students"
-        sub={`${STUDENTS.length} registered students`}
+        sub={`${students.length} registered students`}
         actions={
           <Button variant="accent" size="sm"
             onClick={() => showToast('NFC card enrollment — connect reader first')}>
