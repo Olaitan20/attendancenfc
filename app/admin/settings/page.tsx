@@ -37,7 +37,7 @@ export default function AdminSettingsPage() {
             <Input label="Current Semester / Term"     defaultValue="2024/2025 First Semester" />
             <Input label="Academic Year"               defaultValue="2024/2025" />
             <Button variant="accent"
-              onClick={() => showToast('✅ Settings saved!')}>
+              onClick={() => showToast('Settings saved!')}>
               Save Changes
             </Button>
           </CardBody>
@@ -85,7 +85,7 @@ export default function AdminSettingsPage() {
                 <p className="text-[11.5px] text-muted">This cannot be undone.</p>
               </div>
               <Button variant="danger" size="sm"
-                onClick={() => showToast('⚠️ Action disabled in demo mode')}>
+                onClick={() => showToast('Action disabled in demo mode')}>
                 Reset Data
               </Button>
             </div>
@@ -95,7 +95,7 @@ export default function AdminSettingsPage() {
                 <p className="text-[11.5px] text-muted">Downloads a complete SQL dump.</p>
               </div>
               <Button variant="ghost" size="sm"
-                onClick={() => showToast('⬇ Backup download started…')}>
+                onClick={() => showToast('Backup download started…')}>
                 Export Backup
               </Button>
             </div>

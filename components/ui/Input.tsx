@@ -1,9 +1,10 @@
 import { cn } from '@/lib/utils'
+import type { ReactNode } from 'react'
 import { InputHTMLAttributes, SelectHTMLAttributes } from 'react'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string
-  icon?: string
+  icon?: ReactNode
 }
 
 export function Input({ label, icon, className, ...props }: InputProps) {

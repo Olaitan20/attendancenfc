@@ -10,6 +10,7 @@ import { Select } from '@/components/ui/Input'
 import { COURSES } from '@/lib/mock-data'
 import { getAttendanceLog, getTodaySummary, getAllUsers } from '@/lib/api'
 import { initials } from '@/lib/utils'
+import { RiBarChartBoxLine, RiCheckboxCircleLine, RiCloseCircleLine, RiEmotionHappyLine, RiUserLine } from 'react-icons/ri'
 
 interface AttendanceRecord {
   name: string
@@ -88,10 +89,10 @@ export default function LecturerLivePage() {
 
       {/* Stats — real numbers from Flask */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-        <StatCard icon="✅" value={summary.checked_in}  label="Checked In"      color="#10b981" pct={pct} />
-        <StatCard icon="❌" value={summary.absent}       label="Absent"          color="#f43f5e" />
-        <StatCard icon="📊" value={`${pct}%`}           label="Attendance Rate" color="#f59e0b" pct={pct} />
-        <StatCard icon="👤" value={summary.total_users} label="Total Enrolled"  color="#3b82f6" />
+        <StatCard icon={<RiCheckboxCircleLine />} value={summary.checked_in}  label="Checked In"      color="#10b981" pct={pct} />
+        <StatCard icon={<RiCloseCircleLine />} value={summary.absent}       label="Absent"          color="#f43f5e" />
+        <StatCard icon={<RiBarChartBoxLine />} value={`${pct}%`}           label="Attendance Rate" color="#f59e0b" pct={pct} />
+        <StatCard icon={<RiUserLine />} value={summary.total_users} label="Total Enrolled"  color="#3b82f6" />
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
@@ -106,7 +107,9 @@ export default function LecturerLivePage() {
           </CardHead>
           <div className="p-3 flex flex-col gap-2 max-h-80 overflow-y-auto">
             {absent.length === 0 ? (
-              <p className="text-center text-muted text-sm py-6">Everyone has checked in 🎉</p>
+              <p className="text-center text-muted text-sm py-6 inline-flex items-center justify-center gap-1 w-full">
+                Everyone has checked in <RiEmotionHappyLine />
+              </p>
             ) : absent.map(s => (
               <div key={s.id}
                 className="flex items-center gap-2.5 p-2.5 bg-danger/[0.04] border border-danger/15 rounded-btn">

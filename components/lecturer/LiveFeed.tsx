@@ -1,6 +1,7 @@
 import { Card, CardHead } from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
 import { initials } from '@/lib/utils'
+import { RiLoginCircleLine, RiLogoutCircleRLine } from 'react-icons/ri'
 
 // Shape coming from Flask /api/attendance
 interface AttendanceRecord {
@@ -49,7 +50,10 @@ export default function LiveFeed({ taps }: Props) {
               <div className="flex-1 min-w-0">
                 <p className="text-[13px] font-semibold truncate">{tap.name}</p>
                 <p className="text-[11.5px] text-muted">
-                  {tap.class_group || 'No class'} · {isIn ? '✅ Check In' : '👋 Check Out'}
+                  <span className="inline-flex items-center gap-1">
+                    {tap.class_group || 'No class'} · {isIn ? <RiLoginCircleLine /> : <RiLogoutCircleRLine />}
+                    {isIn ? 'Check In' : 'Check Out'}
+                  </span>
                 </p>
               </div>
               <span className="font-mono text-[11px] text-muted flex-shrink-0">{time}</span>

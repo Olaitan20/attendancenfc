@@ -1,4 +1,5 @@
 import type { NFCReader } from '@/lib/types'
+import { RiAlertLine, RiRadarLine } from 'react-icons/ri'
 
 interface Props { reader: NFCReader }
 
@@ -9,7 +10,7 @@ export default function NFCReaderCard({ reader: r }: Props) {
       className="bg-surface border border-border1 rounded-card p-5 flex items-center gap-4"
       style={{ borderLeft: `3px solid ${isOnline ? '#10b981' : '#f43f5e'}` }}
     >
-      <div className="text-3xl flex-shrink-0">{isOnline ? '📡' : '⚠️'}</div>
+      <div className="text-3xl flex-shrink-0">{isOnline ? <RiRadarLine /> : <RiAlertLine />}</div>
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2 flex-wrap">
           <p className="text-[14px] font-bold">{r.name}</p>

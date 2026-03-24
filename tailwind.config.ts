@@ -13,22 +13,31 @@ const config: Config = {
         mono: ['var(--font-jetbrains)', 'monospace'],
       },
       colors: {
-        bg:       '#070a10',
-        surface:  '#0d1117',
-        surface2: '#131820',
-        surface3: '#1a2030',
-        border1:  '#1e2535',
-        border2:  '#2a3348',
-        txt:      '#e2e8f5',
-        muted:    '#64748b',
-        muted2:   '#8896b3',
-        student:  '#06b6d4',
-        lecturer: '#f59e0b',
-        adm:      '#a78bfa',
-        ok:       '#10b981',
-        danger:   '#f43f5e',
-        warn:     '#f97316',
-        info:     '#3b82f6',
+        // ── Backgrounds (light → slightly tinted whites) ──────────────
+        bg:       '#f5f5f5',   // page canvas — warm off-white
+        surface:  '#ffffff',   // primary card / panel — pure white
+        surface2: '#f0f0f0',   // secondary surface — light gray
+        surface3: '#e8e8e8',   // tertiary / inset surface
+
+        // ── Borders ───────────────────────────────────────────────────
+        border1:  '#dcdcdc',   // subtle dividers
+        border2:  '#c8c8c8',   // prominent borders / separators
+
+        // ── Typography ────────────────────────────────────────────────
+        txt:      '#0a0a0a',   // primary text — near black
+        muted:    '#525252',   // secondary / label text
+        muted2:   '#8a8a8a',   // placeholder / hint text
+
+        // ── Role badges (high-contrast grayscale spread) ──────────────
+        student:  '#111111',   // darkest — near black pill
+        lecturer: '#3a3a3a',   // dark charcoal
+        adm:      '#5e5e5e',   // mid gray
+
+        // ── Status / alert (use fill + text combos for badges) ────────
+        ok:       '#0a0a0a',   // black  → success (decisive, solid)
+        danger:   '#1a1a1a',   // near-black → error (use red-tinted bg if needed)
+        warn:     '#4a4a4a',   // dark gray → warning
+        info:     '#787878',   // medium gray → informational
       },
       borderRadius: {
         card: '0px',

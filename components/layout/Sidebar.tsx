@@ -4,10 +4,27 @@ import { usePathname } from 'next/navigation'
 import { useAuthStore } from '@/store/authStore'
 import { cn } from '@/lib/utils'
 import type { Role } from '@/lib/types'
+import type { IconType } from 'react-icons'
+import {
+  RiCalendarLine,
+  RiCloseLine,
+  RiDashboardLine,
+  RiFileChartLine,
+  RiFileList3Line,
+  RiGroupLine,
+  RiHome4Line,
+  RiIdCardLine,
+  RiNotification3Line,
+  RiPencilLine,
+  RiShutDownLine,
+  RiRadarLine,
+  RiSettings3Line,
+  RiUserStarLine,
+} from 'react-icons/ri'
 
 interface NavItem {
   href: string
-  icon: string
+  icon: IconType
   label: string
   badge?: number
 }
@@ -19,36 +36,36 @@ interface NavSection {
 const NAV: Record<Role, NavSection[]> = {
   student: [
     { title: 'Main', items: [
-      { href: '/student',              icon: '🏠', label: 'Home' },
-      { href: '/student/schedule',     icon: '📅', label: 'My Schedule' },
-      { href: '/student/attendance',   icon: '📊', label: 'Attendance Stats' },
-      { href: '/student/history',      icon: '📋', label: 'History' },
+      { href: '/student',              icon: RiHome4Line, label: 'Home' },
+      { href: '/student/schedule',     icon: RiCalendarLine, label: 'My Schedule' },
+      { href: '/student/attendance',   icon: RiFileChartLine, label: 'Attendance Stats' },
+      { href: '/student/history',      icon: RiFileList3Line, label: 'History' },
     ]},
     { title: 'Account', items: [
-      { href: '/student/notifications', icon: '🔔', label: 'Notifications', badge: 2 },
+      { href: '/student/notifications', icon: RiNotification3Line, label: 'Notifications', badge: 2 },
     ]},
   ],
   lecturer: [
     { title: 'Teaching', items: [
-      { href: '/lecturer',              icon: '📡', label: 'Live Class' },
-      { href: '/lecturer/students',     icon: '👥', label: 'Students' },
-      { href: '/lecturer/mark',         icon: '✏️',  label: 'Mark Attendance' },
-      { href: '/lecturer/reports',      icon: '📈', label: 'Reports & Export' },
+      { href: '/lecturer',              icon: RiRadarLine, label: 'Live Class' },
+      { href: '/lecturer/students',     icon: RiGroupLine, label: 'Students' },
+      { href: '/lecturer/mark',         icon: RiPencilLine,  label: 'Mark Attendance' },
+      { href: '/lecturer/reports',      icon: RiDashboardLine, label: 'Reports & Export' },
     ]},
     { title: 'Account', items: [
-      { href: '/lecturer/notifications', icon: '🔔', label: 'Notifications', badge: 2 },
+      { href: '/lecturer/notifications', icon: RiNotification3Line, label: 'Notifications', badge: 2 },
     ]},
   ],
   admin: [
     { title: 'System', items: [
-      { href: '/admin',              icon: '🏠', label: 'Overview' },
-      { href: '/admin/students',     icon: '🎓', label: 'All Students' },
-      { href: '/admin/lecturers',    icon: '🧑‍🏫', label: 'Lecturers' },
-      { href: '/admin/cards',        icon: '💳', label: 'NFC Cards' },
+      { href: '/admin',              icon: RiHome4Line, label: 'Overview' },
+      { href: '/admin/students',     icon: RiUserStarLine, label: 'All Students' },
+      { href: '/admin/lecturers',    icon: RiGroupLine, label: 'Lecturers' },
+      { href: '/admin/cards',        icon: RiIdCardLine, label: 'NFC Cards' },
     ]},
     { title: 'Config', items: [
-      { href: '/admin/alerts',    icon: '🔔', label: 'Alerts', badge: 2 },
-      { href: '/admin/settings',  icon: '⚙️',  label: 'Settings' },
+      { href: '/admin/alerts',    icon: RiNotification3Line, label: 'Alerts', badge: 2 },
+      { href: '/admin/settings',  icon: RiSettings3Line,  label: 'Settings' },
     ]},
   ],
 }
@@ -78,20 +95,22 @@ export default function Sidebar({ mobileOpen, onMobileClose }: SidebarProps) {
       <div className="px-5 py-5 border-b border-border1 flex items-center gap-2.5">
         <div className="w-9 h-9 rounded-[10px] flex items-center justify-center text-[18px] text-bg font-bold flex-shrink-0"
              style={{ background: meta.color }}>
-          📡
+          <RiRadarLine />
         </div>
         <div>
-          <div className="text-[15px] font-extrabold tracking-tight">AttendNFC</div>
-          <div className="text-[10px] font-mono font-medium uppercase tracking-widest" style={{ color: meta.color }}>
+          {/* <div className="text-[15px] font-extrabold tracking-tight">AttendNFC</div> */}
+          {/* <div className="text-[10px] font-mono font-medium uppercase tracking-widest" style={{ color: meta.color }}>
             {meta.label}
-          </div>
+          </div> */}
         </div>
         {/* mobile close */}
-        <button className="ml-auto lg:hidden text-muted hover:text-txt" onClick={onMobileClose}>✕</button>
+        <button className="ml-auto lg:hidden text-muted hover:text-txt" onClick={onMobileClose}>
+          <RiCloseLine />
+        </button>
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 px-3 py-4 overflow-y-auto space-y-0.5">
+      <nav className="flex-1 px-3 py-4 overflow-y-auto space-y-4">
         {nav.map(section => (
           <div key={section.title}>
             <p className="text-[10px] font-bold text-muted uppercase tracking-widest px-2.5 py-2 mt-3 first:mt-0">
@@ -118,7 +137,9 @@ export default function Sidebar({ mobileOpen, onMobileClose }: SidebarProps) {
                       style={{ background: meta.color }}
                     />
                   )}
-                  <span className="text-base w-5 text-center">{item.icon}</span>
+                  <span className="text-base w-5 text-center flex items-center justify-center">
+                    <item.icon />
+                  </span>
                   {item.label}
                   {item.badge && (
                     <span className="ml-auto bg-danger text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full font-mono">
@@ -147,7 +168,7 @@ export default function Sidebar({ mobileOpen, onMobileClose }: SidebarProps) {
           className="ml-auto text-muted hover:text-danger transition-colors text-sm"
           title="Log out"
         >
-          ⏻
+          <RiShutDownLine />
         </button>
       </div>
     </div>

@@ -5,6 +5,7 @@ import NotificationPanel from '@/components/ui/NotificationPanel'
 import { NOTIFICATIONS } from '@/lib/mock-data'
 import { formatDate } from '@/lib/utils'
 import type { Role } from '@/lib/types'
+import { RiMenuLine, RiNotification3Line } from 'react-icons/ri'
 
 const ROLE_COLOR: Record<Role, string> = {
   student: '#06b6d4',
@@ -36,11 +37,7 @@ export default function Topbar({ title, onMenuClick }: TopbarProps) {
           onClick={onMenuClick}
           aria-label="Open menu"
         >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <rect y="3"  width="20" height="2" rx="1"/>
-            <rect y="9"  width="20" height="2" rx="1"/>
-            <rect y="15" width="20" height="2" rx="1"/>
-          </svg>
+          <RiMenuLine size={20} />
         </button>
         <div>
           <h1 className="text-[15px] font-bold">{title}</h1>
@@ -55,7 +52,7 @@ export default function Topbar({ title, onMenuClick }: TopbarProps) {
           className="relative w-9 h-9 bg-surface2 border border-border2 rounded-btn flex items-center justify-center text-base hover:bg-surface3 transition-colors"
           onClick={() => setNotifOpen(v => !v)}
         >
-          🔔
+          <RiNotification3Line />
           {unread > 0 && (
             <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-danger rounded-full border border-surface" />
           )}

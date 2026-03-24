@@ -1,6 +1,7 @@
 'use client'
 import { initials, cn } from '@/lib/utils'
 import type { Student, MarkStatus } from '@/lib/types'
+import { RiCheckboxBlankCircleLine, RiCheckboxCircleLine, RiCloseCircleLine } from 'react-icons/ri'
 
 interface Props {
   students: Student[]
@@ -38,7 +39,7 @@ export default function MarkGrid({ students, markState, onToggle }: Props) {
               <p className="text-[10.5px] text-muted font-mono">{s.id}</p>
             </div>
             <span className="text-base flex-shrink-0">
-              {st === 'present' ? '✅' : st === 'absent' ? '❌' : '○'}
+              {st === 'present' ? <RiCheckboxCircleLine /> : st === 'absent' ? <RiCloseCircleLine /> : <RiCheckboxBlankCircleLine />}
             </span>
           </button>
         )

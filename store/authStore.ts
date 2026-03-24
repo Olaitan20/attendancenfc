@@ -1,50 +1,49 @@
 'use client'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import type { Role, User } from '@/lib/types'
 
-const DEMO_USERS: Record<Role, User> = {
-  student: {
-    id: 'CSC/21/001',
-    name: 'Ade Bello',
-    email: 'ade.bello@student.edu',
-    role: 'student',
-    initials: 'AB',
-    classGroup: 'CSC 300L',
-  },
-  lecturer: {
-    id: 'LEC/001',
-    name: 'Dr. Afolabi',
-    email: 'afolabi@university.edu',
-    role: 'lecturer',
-    initials: 'DA',
-    department: 'Computer Science',
-  },
-  admin: {
-    id: 'ADM/001',
-    name: 'Admin',
-    email: 'admin@university.edu',
-    role: 'admin',
-    initials: 'SA',
-  },
+export type Role = 'student' | 'lecturer' | 'admin'
+
+export interface AuthUser {
+  id: number
+  name: string
+  email: string
+  matric_number: string
+  role: Role
+  class_group: string
+  card_uid: string
+  courses: { id: number; code: string; name: string }[]
+  initials: string
 }
 
 interface AuthState {
-  user: User | null
+  user: AuthUser | null
+  token: string | null          // simple user id stored as "token" for now
   isAuthenticated: boolean
-  login: (role: Role) => void
+  setUser: (user: AuthUser) => void
   logout: () => void
+}
+
+function getInitials(name: string): string {
+  return name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)
 }
 
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
-      user: null,
+      user:            null,
+      token:           null,
       isAuthenticated: false,
-      login: (role: Role) =>
-        set({ user: DEMO_USERS[role], isAuthenticated: true }),
+
+      setUser: (user) =>
+        set({
+          user:            { ...user, initials: getInitials(user.name) },
+          token:           String(user.id),
+          isAuthenticated: true,
+        }),
+
       logout: () =>
-        set({ user: null, isAuthenticated: false }),
+        set({ user: null, token: null, isAuthenticated: false }),
     }),
     { name: 'attendnfc-auth' }
   )

@@ -10,6 +10,7 @@ import Toast from '@/components/ui/Toast'
 import { STUDENTS, COURSES } from '@/lib/mock-data'
 import { useToast } from '@/hooks/useToast'
 import type { MarkStatus } from '@/lib/types'
+import { RiCheckboxCircleLine, RiCloseCircleLine, RiRefreshLine } from 'react-icons/ri'
 
 export default function MarkAttendancePage() {
   const [markState, setMarkState] = useState<Record<string, MarkStatus>>(
@@ -31,8 +32,8 @@ export default function MarkAttendancePage() {
   const submit = () => {
     const p = Object.values(markState).filter(v => v === 'present').length
     const a = Object.values(markState).filter(v => v === 'absent').length
-    if (p + a === 0) { showToast('⚠️ Please mark at least one student'); return }
-    showToast(`✅ Submitted: ${p} present · ${a} absent`)
+    if (p + a === 0) { showToast('Please mark at least one student'); return }
+    showToast(`Submitted: ${p} present · ${a} absent`)
   }
 
   const marked  = Object.values(markState).filter(Boolean).length
@@ -45,7 +46,9 @@ export default function MarkAttendancePage() {
         title="Mark Attendance"
         sub="Manually record attendance for a class session"
         actions={
-          <Button variant="accent" onClick={submit}>✅ Submit Attendance</Button>
+          <Button variant="accent" onClick={submit}>
+            <span className="inline-flex items-center gap-1"><RiCheckboxCircleLine /> Submit Attendance</span>
+          </Button>
         }
       />
 
@@ -59,9 +62,15 @@ export default function MarkAttendancePage() {
         <div className="w-44">
           <Input type="date" defaultValue={new Date().toISOString().split('T')[0]} />
         </div>
-        <Button variant="ghost" size="sm" onClick={() => markAll('present')}>✅ All Present</Button>
-        <Button variant="ghost" size="sm" onClick={() => markAll('absent')}>❌ All Absent</Button>
-        <Button variant="ghost" size="sm" onClick={() => markAll(null)}>↺ Reset</Button>
+        <Button variant="ghost" size="sm" onClick={() => markAll('present')}>
+          <span className="inline-flex items-center gap-1"><RiCheckboxCircleLine /> All Present</span>
+        </Button>
+        <Button variant="ghost" size="sm" onClick={() => markAll('absent')}>
+          <span className="inline-flex items-center gap-1"><RiCloseCircleLine /> All Absent</span>
+        </Button>
+        <Button variant="ghost" size="sm" onClick={() => markAll(null)}>
+          <span className="inline-flex items-center gap-1"><RiRefreshLine /> Reset</span>
+        </Button>
       </div>
 
       {/* Summary bar */}
