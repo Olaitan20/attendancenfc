@@ -38,6 +38,7 @@ const NAV: Record<Role, NavSection[]> = {
     { title: 'Main', items: [
       { href: '/student',              icon: RiHome4Line, label: 'Home' },
       { href: '/student/schedule',     icon: RiCalendarLine, label: 'My Schedule' },
+      { href: '/student/courses',      icon: RiCalendarLine, label: 'My Courses' },
       { href: '/student/attendance',   icon: RiFileChartLine, label: 'Attendance Stats' },
       { href: '/student/history',      icon: RiFileList3Line, label: 'History' },
     ]},
