@@ -2,9 +2,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/store/authStore'
+import type { Role } from '@/store/authStore'
 import { RiArrowRightLine } from 'react-icons/ri'
-
-type Role = 'student' | 'lecturer' | 'admin'
 
 const ROLES: { label: string; role: Role; redirect: string }[] = [
   { label: 'Student',  role: 'student',  redirect: '/student'  },
@@ -21,8 +20,15 @@ export default function LoginPage() {
     e.preventDefault()
     const picked = ROLES.find(r => r.role === selected)!
     setUser({
-      role: picked.role,
-      name: `Test ${picked.label}`,
+      id:            1,
+      name:          `Test ${picked.label}`,
+      email:         'dev@test.com',
+      matric_number: 'TEST/00/000',
+      role:          picked.role,
+      class_group:   'DEV-100',
+      card_uid:      'DEV-CARD-001',
+      courses:       [],
+      initials:      'TD',
     })
     router.push(picked.redirect)
   }
