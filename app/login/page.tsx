@@ -4,14 +4,16 @@ import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/store/authStore'
 import { RiArrowRightLine } from 'react-icons/ri'
 
-const ROLES = [
+type Role = 'student' | 'lecturer' | 'admin'
+
+const ROLES: { label: string; role: Role; redirect: string }[] = [
   { label: 'Student',  role: 'student',  redirect: '/student'  },
   { label: 'Lecturer', role: 'lecturer', redirect: '/lecturer' },
   { label: 'Admin',    role: 'admin',    redirect: '/admin'    },
 ]
 
 export default function LoginPage() {
-  const [selected, setSelected] = useState('student')
+  const [selected, setSelected] = useState<Role>('student')
   const { setUser }             = useAuthStore()
   const router                  = useRouter()
 
@@ -19,9 +21,8 @@ export default function LoginPage() {
     e.preventDefault()
     const picked = ROLES.find(r => r.role === selected)!
     setUser({
-      role:       picked.role,
-      name:       `Test ${picked.label}`,
-      identifier: 'TEST/00/000',
+      role: picked.role,
+      name: `Test ${picked.label}`,
     })
     router.push(picked.redirect)
   }
@@ -72,6 +73,7 @@ export default function LoginPage() {
             <strong className="text-muted2">Auth is disabled.</strong> Select any role above to enter that dashboard directly.
           </p>
         </div>
+
       </div>
     </div>
   )
